@@ -21,7 +21,8 @@ func toggle_lights(on : bool):
 	if on:
 		get_tree().call_group("___AntiLights", "queue_free")
 	else:
-		var root = EditorInterface.get_edited_scene_root()
+		var editor : EditorInterface = get_editor_interface()
+		var root = editor.get_edited_scene_root()
 		if is_instance_valid(root):
 			add_anti_lights(root)
 
