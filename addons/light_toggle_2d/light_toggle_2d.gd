@@ -9,11 +9,12 @@ func _enter_tree() -> void:
 	checkbutton.button_pressed = true
 	checkbutton.toggled.connect(toggle_lights)
 	add_control_to_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, checkbutton)
-	scene_changed.connect(reset_state)
+	scene_changed.connect(reset_state.unbind(1))
 
 
 func reset_state():
 	checkbutton.button_pressed = true
+	get_tree().call_group("___AntiLights", "queue_free")
 
 
 func toggle_lights(on : bool):
@@ -21,7 +22,8 @@ func toggle_lights(on : bool):
 		get_tree().call_group("___AntiLights", "queue_free")
 	else:
 		var root = EditorInterface.get_edited_scene_root()
-		add_anti_lights(root)
+		if is_instance_valid(root):
+			add_anti_lights(root)
 
 
 func add_anti_lights(node : Node) -> void:
@@ -41,4 +43,5 @@ func add_anti_lights(node : Node) -> void:
 
 
 func _exit_tree() -> void:
+	reset_state()
 	remove_control_from_container(EditorPlugin.CONTAINER_CANVAS_EDITOR_MENU, checkbutton)
