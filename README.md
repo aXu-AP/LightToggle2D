@@ -1,7 +1,7 @@
 # Editor Light Toggle 2D
 A Godot addon for disabling lighting in editor for 2D scenes. Useful for levels where lighting makes it hard to see the big picture, for example dark levels.
 
-## Using ShapeTexture2D
+## Using LightToggle2D
 * Install by downloading the project and copying `addons` folder into your project.
 * Enable plugin in `Project` > `Project Settings...` > `Plugins` > `LightToggle2D`
 * Use the `Lights` button in toolbar for 2D scenes.
